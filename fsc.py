@@ -9,11 +9,6 @@ def roundNotCrappily(n):
     """
     None of this accountant nonsense please!
     """
-    # convert_dtypes seems to have not worked
-    try:
-        n = int (n)
-    except ValueError:
-        n = float(n)
     return math.floor(n + 0.5) # normal people rounding
 
 if __name__ == "__main__":
@@ -26,15 +21,21 @@ if __name__ == "__main__":
   courseMarks = pd.read_csv(ns.canvas_file[0]).convert_dtypes()
   fscIn = pd.read_excel(ns.fsc_file[0]).convert_dtypes()
 
-  #courseMarks.drop(["Points Possible", "Student, Test"], inplace=True)
-  courseMarks.drop([0], inplace=True)
+  # Drop the Points Possible row
+  courseMarks.drop(courseMarks.loc[courseMarks["Student"].str.match(r".*Points Possible")==True].index, inplace=True)
+
+  # Drop the test student
+  courseMarks.drop(courseMarks.loc[courseMarks['Student']=="Student, Test"].index, inplace=True)
+
+  # Convert Final Scores to numeric.
+  # This convert_dtypes fails if any of them is an integer, so manually coerce them.
+  courseMarks["Final Score"] = pd.to_numeric(courseMarks["Final Score"], errors="coerce")
 
   fscIn.drop(columns=["Percent Grade"],inplace=True)
 
   courseMarks["Percent Grade"] = \
        [roundNotCrappily(series["Final Score"])
         for (index,series) in courseMarks.iterrows() ]
-
 
   marks = courseMarks[["SIS User ID","Percent Grade"]]\
       .rename(columns={"SIS User ID" : "Student Number"})
