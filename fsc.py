@@ -1,11 +1,6 @@
 #!/usr/bin/env -S python -B
 # -B prevents creating __pycache__/ directory
 
-"""
-all-grades.py - aggregate all the course component canvas sheets into
-                one big one
-"""
-
 import pandas as pd
 import math
 import argparse
