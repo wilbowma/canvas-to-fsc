@@ -1,0 +1,4 @@
+Student,ID,SIS User ID,SIS Login ID,Section,Student Number,Lecture,Final Score
+    Points Possible,,,,,,,(read only)
+foo,1,1,W,CPSC 411 201 2020W,1,201,97.24
+bar,1,2,G,CPSC 411 201 2020W,2,201,83
