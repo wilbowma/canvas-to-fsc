@@ -7,9 +7,9 @@ import argparse
 
 def roundNotCrappily(n):
     """
-    None of this accountant nonsense please!
+    None of this accountant nonsense please! Then truncate to between 0 and 100 (as expected by FSC)
     """
-    return math.floor(n + 0.5) # normal people rounding
+    return max(0, min(100, math.floor(n + 0.5))) # normal people rounding
 
 if __name__ == "__main__":
   parser = argparse.ArgumentParser(description="Convert Canvas CSV into a FSC CSV")
