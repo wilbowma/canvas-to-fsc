@@ -19,3 +19,6 @@ or
 
 ## Requirements:
 Requires Python 3, Pandas, and python-xlrd.
+```
+pip3 install pandas xlrd
+```
